@@ -22,7 +22,7 @@ cp ../lib/hamcrest-core-1.3.jar lib/
 cp ../lib/junit-4.13.2.jar lib/
 
 
-javac -cp ".;lib/hamcrest-core-1.3.jar;lib/junit-4.13.2.jar" *.java
+javac -cp $CPATH *.java
 if [[ -f ListExamples.class ]] && [[ -f TestListExamples.class ]]
 then
     echo "Compiled files"
@@ -31,7 +31,7 @@ else
     exit 1
 fi
 
-java -cp ".;lib/junit-4.13.2.jar;lib/hamcrest-core-1.3.jar" org.junit.runner.JUnitCore TestListExamples > results.txt
+java -cp $CPATH org.junit.runner.JUnitCore TestListExamples > results.txt
 grep "Tests run: " results.txt > fails.txt
 grep "OK (" results.txt > success.txt
 if [[ "./fails.txt" == `find ./ -type f -empty` ]]
